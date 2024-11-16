@@ -13,6 +13,10 @@ def get_element(element):
         print("Element not found.")
 
 def search_by_group(group):
+    # Prompt user to input the desired group
+    group = input("Enter the group name: ")
+    
+    # Search for elements in the specified group
     result = {symbol: details for symbol, details in periodic_table.items() if details['group'] == group}
     return result if result else "No elements found in this group."
 
@@ -68,6 +72,11 @@ def main():
             element = str(input("What is the desired element? "))
             print(get_element(element))
         elif choice == '2':
+            # Extract unique group names
+            groups = set(details['group'] for details in periodic_table.values())
+            print("Available groups:")
+            for group in groups:
+                print(group)
             group = input("Enter the group name: ")
             print(search_by_group(group))
         elif choice == '3':
@@ -89,6 +98,5 @@ def main():
             break
         else:
             print("Invalid choice. Please try again.")
-
 
 main()
