@@ -1,5 +1,11 @@
 import json
 import CASLib
+import PeriodicalLib
+
+# Load the JSON file
+with open('element_identities.json', 'r') as file:
+    periodic_table = json.load(file)
+# Access details for an element (e.g., Oxygen)
 
 def main():
     while True:
@@ -14,8 +20,8 @@ def main():
 
         choice = input("\nEnter your choice (1-7): ")
         if choice == '1':
-            element = str(input("What is the desired element? "))
-            print(get_element(element))
+            element = str(input("What is the desired element? ").strip()).capitalize()
+            print(PeriodicalLib.get_element(element))
         elif choice == '2':
             # Extract unique group names
             groups = set(details['group'] for details in periodic_table.values())
@@ -23,21 +29,21 @@ def main():
             for group in groups:
                 print(group)
             group = input("Enter the group name: ")
-            print(search_by_group(group))
+            print(PeriodicalLib.search_by_group(group))
         elif choice == '3':
             state = input("Enter the state (Solid, Liquid, Gas): ")
-            print(elements_in_state(state))
+            print(PeriodicalLib.elements_in_state(state))
         elif choice == '4':
             element1 = input("Enter the symbol of the first element: ").strip()
             element2 = input("Enter the symbol of the second element: ").strip()
-            print(compare_elements(element1, element2))
+            print(PeriodicalLib.compare_elements(element1, element2))
         elif choice == '5':
             property_name = input("Enter the property name: ")
             min_value = float(input("Enter the minimum value: "))
             max_value = float(input("Enter the maximum value: "))
-            print(filter_by_property(property_name, min_value, max_value))
+            print(PeriodicalLib.filter_by_property(property_name, min_value, max_value))
         elif choice == '6':
-            print(list_all_symbols())
+            print(PeriodicalLib.list_all_symbols())
         elif choice == '7':
             print("Goodbye!")
             break
